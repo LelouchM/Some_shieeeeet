@@ -1,0 +1,36 @@
+.container {
+  margin-top: 50px;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  background: gray;
+  overflow: hidden; 
+}
+
+.content {
+  width: 150px;
+  height: 1500px;
+  margin: 0 auto;
+  background: linear-gradient(to top, white, black);
+  border-bottom: 2px solid black;
+}
+
+#scroll-bar {
+  height:100%;
+  width: 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: red;
+  display: none;
+}
+#scroll {
+  height:50px;
+  width: 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: black;
+  
+  transition: 0.2s linear;
+}
