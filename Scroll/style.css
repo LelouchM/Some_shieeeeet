@@ -13,24 +13,28 @@
   margin: 0 auto;
   background: linear-gradient(to top, white, black);
   border-bottom: 2px solid black;
+  
+  transition: 0.3s linear;
 }
 
 #scroll-bar {
   height:100%;
-  width: 15px;
+  width: 10px;
   position: absolute;
   right: 0;
   top: 0;
-  background: red;
+  background: white;
+  
   display: none;
 }
 #scroll {
-  height:50px;
-  width: 15px;
+  height:80px;
+  width: 100%;
   position: absolute;
   right: 0;
   top: 0;
   background: black;
+  border-radius: 10px;
   
-  transition: 0.2s linear;
+  transition: 0.3s linear;
 }

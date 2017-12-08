@@ -11,15 +11,16 @@ let currentScroll = 0;
 
 scroll.addEventListener('mousedown', (e) => {
   const scrollBarTop = scrollBar.getBoundingClientRect().top + scrollY;
-  const mousePosition = e.pageY - scroll.getBoundingClientRect().top + scrollY;
-  
+  const mousePosition = e.pageY - (scroll.getBoundingClientRect().top + scrollY);
+ 
   function mouseMove(e) {
-    let scrollLength = e.pageY - scrollBarTop - mousePosition;
+    let scrollLength = (e.pageY - scrollBarTop) - mousePosition;
+    
     changeScroll(scrollLength);
   }
   function mouseUp() {
     document.removeEventListener('mousemove', mouseMove);
-    scrollBar.removeEventListener('mouseup', mouseUp);
+    document.removeEventListener('mouseup', mouseUp);
     scroll.style.transition = '';
   }
   
@@ -34,7 +35,7 @@ scrollBar.addEventListener('click', (e) => {
   if (e.target.id != 'scroll') {
   const scrollBarTop = scrollBar.getBoundingClientRect().top + scrollY;
   changeScroll(e.pageY - scrollBarTop);
-  }
+}
 });
 
 document.addEventListener('keydown', (e) => {
@@ -50,7 +51,27 @@ document.addEventListener('keydown', (e) => {
 container.addEventListener('wheel', (e) => {
   changeScroll(currentScroll + ((e.deltaY > 0)? 15 : -15));
 });
-
+  
+scroll.addEventListener('touchstart', (e) => {
+  const fingerPos = e.changedTouches[0].clientY -(scroll.getBoundingClientRect().top + scrollY);
+  
+  document.addEventListener('touchmove', handleMove);
+  document.addEventListener('touchend', toucheEnd);
+  
+  function handleMove(e) {
+    changeScroll(((e.changedTouches[0].clientY) -(scrollBar.getBoundingClientRect().top + scrollY)) - fingerPos);
+    
+  }
+  
+  function toucheEnd(e) {
+    document.removeEventListener('touchmove', handleMove);
+    document.removeEventListener('touchend', toucheEnd);
+    scroll.style.transition = '';
+  }
+  e.preventDefault();
+  scroll.style.transition = 'initial';
+});
+                        
 function changeScroll(scrollLength) {
   if (scrollLength < 0) {
     scrollLength = 0;
