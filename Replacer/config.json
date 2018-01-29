@@ -1,0 +1,6 @@
+{
+	"dir": "docs",
+	"exclude": ["exclude", "ex.html", "node_modules"],
+	"search": "https://example.com/a/a.html",
+	"replaceStr": "https://example.com/b.html"
+}
